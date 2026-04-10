@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+  <script src="js/external/tinymce/js/tinymce/tinymce.min.js"></script>
+  <script>tinymce.init({selector:'textarea#blogid',
+  license_key: 'gpl',
+  plugins: 'image code',
+  toolbar: 'undo redo | link image | code',
+  /* enable title field in the Image dialog*/
+  image_title: true,
+  /* enable automatic uploads of images represented by blob or data URIs*/
+  automatic_uploads: true,
+  /*
+    URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+    images_upload_url: 'postAcceptor.php',
+    here we add custom filepicker only to Image dialog
+  */
+  file_picker_types: 'image',
+  /* and here's our custom image picker*/
+  file_picker_callback: function (cb, value, meta) {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+
+    /*
+      Note: In modern browsers input[type="file"] is functional without
+      even adding it to the DOM, but that might not be the case in some older
+      or quirky browsers like IE, so you might want to add it to the DOM
+      just in case, and visually hide it. And do not forget do remove it
+      once you do not need it anymore.
+    */
+
+    input.onchange = function () {
+      var file = this.files[0];
+
+      var reader = new FileReader();
+      reader.onload = function () {
+        /*
+          Note: Now we need to register the blob in TinyMCEs image blob
+          registry. In the next release this part hopefully won't be
+          necessary, as we are looking to handle it internally.
+        */
+        var id = 'blobid' + (new Date()).getTime();
+        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+        var base64 = reader.result.split(',')[1];
+        var blobInfo = blobCache.create(id, file, base64);
+        blobCache.add(blobInfo);
+
+        /* call the callback and populate the Title field with the file name */
+        cb(blobInfo.blobUri(), { title: file.name });
+      };
+      reader.readAsDataURL(file);
+    };
+
+    input.click();
+  }
+  });</script>
+  <script src="js/funct_helpers.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body onload="loadProfile()">
+
+  <div class="content-nav-bar"><p id="userid"></p>  
+    <div class="form-popup" id="myForm">
+        <form action="api/login.php" method="POST" class="form-container">
+            <h1>Login</h1>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email"/>
+            <label for="pass"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="pass"/>
+            <input type="submit" class="btn" value="Submit"/>
+            <button type="button" class="btn cancel" onclick="closeForm('myForm')">Close</button>
+        </form>
+    </div>
+    <div class="menu-container" onclick="changeMenuIcon(this)">
+        <div class="menu-bar1"></div>
+        <div class="menu-bar2"></div>
+        <div class="menu-bar3"></div>
+        <div class="dropdown">
+            <div id="myDropdown" class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="api/showBlog.php">Blog</a>
+                <a href="search.html">Search</a>
+                <a id ="linklogin" href="login.html">Log In</a>
+                <a id ="linkregister" href="registration.html">Register</a>
+            </div>
+        </div>
+    </div>
+    <p class="open-button" id="loginid" onclick="openForm('myForm')">Log In</p>
+</div>
+<div class="content-form-display">
+  <form action="api/blog.php" method="POST">
+  <textarea id="blogid" name="blogcontent">Next, use our Get Started docs to setup Tiny!</textarea>
+  <div id="keywords">
+    <input type="text" name="keyword" id="storedKeyWord"></input>
+    <button type="button" id="storedidbtn" onclick="deleteKeyWords()">-</button>
+  </div>
+  <div>
+    <input type="text" placeholder="keyword" id="inputKeyWords"></input>
+    <button type="button" onclick="copyKeyWords()">+</button>
+  </div>
+  <input type="submit" value="Submit">
+  </form>
+</div>
+</body>
+</html>
