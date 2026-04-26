@@ -68,7 +68,7 @@ if ($user) {
     }
 
     session_unset();
-    header('Location: index.html');
+    header('Location: /index.html');
 
 } else {
     // Error message

@@ -19,25 +19,25 @@ function loadProfile() {
         var aShowProfile = document.createElement("a");
         aShowProfile.appendChild( document.createTextNode("Show Profile"));
         var aShowProfileAttr = document.createAttribute("href");
-        aShowProfileAttr.value="show_profile.php";
+        aShowProfileAttr.value="/show_profile.php";
         aShowProfile.setAttributeNode(aShowProfileAttr);
 
         var aUpdateProfile = document.createElement("a");
         aUpdateProfile.appendChild(document.createTextNode("Update Profile"));
         var aUpdateProfileAttr = document.createAttribute("href");
-        aUpdateProfileAttr.value="update_profile.html";
+        aUpdateProfileAttr.value="/update_profile.html";
         aUpdateProfile.setAttributeNode(aUpdateProfileAttr);
 
         var aCreateBlogProfile = document.createElement("a");
         aCreateBlogProfile.appendChild(document.createTextNode("New Blog Page"));
         var aCreateBlogProfileAttr = document.createAttribute("href");
-        aCreateBlogProfileAttr.value="blog.html";
+        aCreateBlogProfileAttr.value="/blog.html";
         aCreateBlogProfile.setAttributeNode(aCreateBlogProfileAttr);
 
         var aLogoutProfile = document.createElement("a");
         aLogoutProfile.appendChild(document.createTextNode("Log Out"));
         var aLogoutProfileAttr = document.createAttribute("href");
-        aLogoutProfileAttr.value="logout.php";
+        aLogoutProfileAttr.value="api/logout.php";
         aLogoutProfile.setAttributeNode(aLogoutProfileAttr);
 
         var menudropdown = document.getElementById("myDropdown");
@@ -53,7 +53,7 @@ function loadProfile() {
       }
     }
   };
-  xhttp.open("GET", "load_profile.php", true);
+  xhttp.open("GET", "/api/load_profile.php", true);
   xhttp.send();
 }
 

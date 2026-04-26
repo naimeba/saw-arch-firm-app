@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/helper.php';
+
 $mysql_host = envValue('DB_HOST', 'mysql');
 
 // TODO: use your credentials here

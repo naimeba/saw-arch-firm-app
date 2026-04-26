@@ -1,12 +1,9 @@
 <?php
 
-// TODO: change credentials in the db/mysql_credentials.php file
 require_once('db/mysql_credentials.php');
 
 // Add session control, header, ...
 session_start();
-require_once('headerSnippet.php');
-require_once('menu.php');
 
 // Open DBMS Server connection
 $con= mysqli_connect($mysql_host,$mysql_user,$mysql_pass,$mysql_db);
@@ -36,6 +33,11 @@ function login($email, $pass, $db_connection) {
     $res = mysqli_query($db_connection,$query);
 
     $row = mysqli_fetch_assoc($res);
+
+    if (!$row)
+    {
+        return null;
+    }
     
     $password = $row['password'];
 
@@ -52,18 +54,35 @@ function login($email, $pass, $db_connection) {
 // Get user from login
 $user = login($email, $password, $con);
 
-echo '<div class="show-profile-content">';
+// echo '<div class="show-profile-content">';
+// if ($user) {
+//     // Welcome message
+//     echo "Welcome $user!";
+//     echo '</div>';
+//     $_SESSION["UserId"]=$user;
+//     $_SESSION["Email"]=$email;
+//     header('Location: /index.html');
+//     return;
+// } else {
+//     // Error message
+//     echo "Wrong email or password";
+// }
+// echo '</div>';
+
 if ($user) {
-    // Welcome message
-    echo "Welcome $user!";
-    echo '</div>';
+    // // Welcome message
+    // echo "Welcome $user!";
+    // echo '</div>';
     $_SESSION["UserId"]=$user;
     $_SESSION["Email"]=$email;
-    header('Location: index.html');
-    return;
-} else {
-    // Error message
-    echo "Wrong email or password";
+    header('Location: /index.html');
+    exit;
 }
+require_once('headerSnippet.php');
+require_once('menu.php');
+echo '<div class="show-profile-content">';
+echo "Wrong email or password";
 echo '</div>';
+
+
 

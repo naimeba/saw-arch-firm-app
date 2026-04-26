@@ -31,7 +31,7 @@ CREATE TABLE `blog` (
   `id` int(10) UNSIGNED NOT NULL,
   `keywords` varchar(200) DEFAULT NULL,
   `blog_content` mediumtext DEFAULT NULL,
-  `data_pubblicazione` date NOT NULL DEFAULT current_timestamp()
+  `data_pubblicazione` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

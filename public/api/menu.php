@@ -1,7 +1,7 @@
 <?php
 
 echo '
-<script type="text/javascript" src="funct_helpers.js"></script>
+<script type="text/javascript" src="/js/funct_helpers.js"></script>
 <div class="content-nav-bar"><p id="userid"></p>  
     <div class="form-popup" id="myForm">
         <form action="login.php" method="POST" class="form-container">
@@ -20,11 +20,11 @@ echo '
         <div class="menu-bar3"></div>
         <div class="dropdown">
             <div id="myDropdown" class="dropdown-content">
-                <a href="index.html">Home</a>
-                <a href="showBlog.php">Blog</a>
-                <a href="search.html">Search</a>
-                <a id ="linklogin" href="login.html">Log In</a>
-                <a id ="linkregister" href="registration.html">Register</a>
+                <a href="/index.html">Home</a>
+                <a href="/api/showBlog.php">Blog</a>
+                <a href="/search.html">Search</a>
+                <a id ="linklogin" href="/login.html">Log In</a>
+                <a id ="linkregister" href="/registration.html">Register</a>
             </div>
         </div>
     </div>

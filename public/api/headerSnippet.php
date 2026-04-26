@@ -5,6 +5,6 @@
             NBA Architects
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="/css/main.css">
 </head>
 <body onload="loadProfile()">
