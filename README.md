@@ -1,5 +1,5 @@
 # SAW Architecture Firm App
-
+## Multi-container PHP Application using Docker Compose
 Web application developed for an architecture firm.
 
 The project was created as part of a web development course and allows visitors to discover architecture projects while providing authenticated users with access to blog publishing and profile management features.
